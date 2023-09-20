@@ -51,4 +51,13 @@ func main() {
 	num, _ := strconv.Atoi(stringNumber)
 	fmt.Println(num)
 	fmt.Printf("Tipe data num %T\n", num)
+
+	for i := 0; i < 5; i++ {
+		fmt.Println(i)
+	}
+
+	dataArray := []string{"aaa", "bbb", "ccc"}
+	for index, data := range dataArray {
+		fmt.Println(index+1, data)
+	}
 }
