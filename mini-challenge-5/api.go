@@ -58,17 +58,21 @@ func getUser(w http.ResponseWriter, r *http.Request) {
 		email := r.FormValue("email")
 		password := r.FormValue("password")
 
-		user := User{}
+		var user User
 		for _, v := range users {
 			if v.Email == email {
 				if v.Password == password {
 					user = v
 					break
+				} else {
+					sendErrorMessage("Wrong Password", w)
+					return
 				}
-				sendErrorMessage("Wrong Password", w)
-				return
 			}
-			sendErrorMessage("Email is not registered!", w)
+		}
+		emptyStruct := User{}
+		if user == emptyStruct {
+			sendErrorMessage("Email is not registered", w)
 			return
 		}
 
