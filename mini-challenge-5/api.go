@@ -28,7 +28,6 @@ var PORT = ":9090"
 
 func main() {
 	http.HandleFunc("/", getUsers)
-	// http.HandleFunc("/users", getUsers)
 	http.HandleFunc("/user", getUser)
 
 	fmt.Println("Application is listening on port", PORT)
