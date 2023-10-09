@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>User Data</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="overflow-hidden bg-white shadow sm:rounded-lg max-w-2xl my-20 mx-auto">
+        <div class="px-4 py-5 sm:px-6">
+            <h3 class="text-2xl font-medium leading-6 text-gray-900">Profile Page</h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">User details</p>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+            <dl class="sm:divide-y sm:divide-gray-200">
+                <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Full name</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{.Name}}</dd>
+                </div>
+                <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Job</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{.Job}}</dd>
+                </div>
+                <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Email</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{.Email}}</dd>
+                </div>
+                <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Address</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{.Address}}</dd>
+                </div>
+                <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Reason to be happy</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{.Reason}}</dd>
+                </div>
+            </dl>
+        </div>
+        <div class="max-w-xs mx-auto my-10">
+            <a href="/">
+                <button
+                    class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Logout</button>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
