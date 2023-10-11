@@ -1,3 +1,7 @@
 go 1.20
 
-use ./mini-challenge-4
+use (
+	./mini-challenge-4
+	./sesi-5/gin-framework
+	./sesi-6/go-sql/mysql
+)
