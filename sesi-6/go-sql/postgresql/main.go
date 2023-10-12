@@ -4,14 +4,14 @@ import (
 	"database/sql"
 	"fmt"
 
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 )
 
 const (
 	host     = "localhost"
 	port     = 5432
-	user     = "root"
-	password = "root"
+	user     = ""
+	password = ""
 	dbname   = "db-go-sql"
 )
 
@@ -28,9 +28,9 @@ type Book struct {
 }
 
 func main() {
-	mysqlInfo := fmt.Sprintf("%s:%s@/%s", user, password, dbname)
+	config := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 
-	db, err = sql.Open("mysql", mysqlInfo)
+	db, err = sql.Open("postgres", config)
 	if err != nil {
 		panic(err)
 	}
@@ -44,7 +44,7 @@ func main() {
 	fmt.Println("Successfully connected to database")
 
 	//CreateBook()
-	GetBooks()
+	//GetBooks()
 	//UpdateBook()
 	//DeleteBook()
 }
@@ -54,25 +54,11 @@ func CreateBook() {
 
 	sqlStatement := `
 	INSERT INTO books (title, author, stock)
-	VALUES (?, ?, ?)
+	VALUES ($1, $2, $3)
+	Returning *
 	`
 
-	result, err := db.Exec(sqlStatement, "Judul Buku Baru", "Pengarang Buku Baru", 30)
-	if err != nil {
-		panic(err)
-	}
-
-	lastInsertID, err := result.LastInsertId()
-	if err != nil {
-		panic(err)
-	}
-
-	// Retrieve the inserted row using the lastInsertID
-	sqlRetrieve := `
-    SELECT * FROM books WHERE id = ?
-	`
-
-	err = db.QueryRow(sqlRetrieve, lastInsertID).Scan(&book.ID, &book.Title, &book.Author, &book.Stock)
+	err = db.QueryRow(sqlStatement, "Judul Buku", "Pengarang Buku", 30).Scan(&book.ID, &book.Title, &book.Author, &book.Stock)
 	if err != nil {
 		panic(err)
 	}
@@ -106,7 +92,7 @@ func GetBooks() {
 }
 
 func DeleteBook() {
-	sqlStatement := `DELETE from books WHERE id = ?;`
+	sqlStatement := `DELETE from books WHERE id = $1;`
 
 	res, err := db.Exec(sqlStatement, 1)
 	if err != nil {
@@ -122,8 +108,8 @@ func DeleteBook() {
 }
 
 func UpdateBook() {
-	sqlStatement := `UPDATE books SET title = ?, author = ?, stock = ? WHERE id = ?;`
-	res, err := db.Exec(sqlStatement, "Laskar Pelangi", "Andrea Hirata", 20, 2)
+	sqlStatement := `UPDATE books SET title = $2, author = $3, stock = $4 WHERE id = $1;`
+	res, err := db.Exec(sqlStatement, 1, "Laskar Pelangi", "Andrea Hirata", 20)
 	if err != nil {
 		panic(err)
 	}
