@@ -5,4 +5,5 @@ use (
 	./mini-challenge-6
 	./sesi-5/gin-framework
 	./sesi-6/go-sql
+	./sesi-9/go-upload-file
 )
