@@ -10,7 +10,7 @@ import (
 
 type Item struct {
 	ID          uint64 `json:"id" gorm:"primaryKey"`
-	Name        string `json:"name" gorm:"not null;unique"`
+	Name        string `json:"name" gorm:"not null"`
 	Description string `json:"description" gorm:"not null"`
 	Quantity    int    `json:"quantity" gorm:"not null"`
 	OrderID     uint

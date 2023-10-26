@@ -87,6 +87,7 @@ func UpdateOrder(ctx *gin.Context) {
 
 	for _, item := range updatedOrder.Items {
 		err := db.Model(&updatedItems).Where("order_id = ?", orderID).Updates(models.Item{
+			ID:          item.ID,
 			Name:        item.Name,
 			Description: item.Description,
 			Quantity:    item.Quantity,
@@ -98,39 +99,10 @@ func UpdateOrder(ctx *gin.Context) {
 		}
 	}
 
-	fmt.Printf("Updated order 2: %+v \n", updatedOrder)
-
-	// bookID := ctx.Param("bookID")
-	// condition := false
-	// var updatedBook Book
-
-	// if err := ctx.ShouldBindJSON(&updatedBook); err != nil {
-	// 	ctx.AbortWithError(http.StatusBadRequest, err)
-	// 	return
-	// }
-
-	// for i, book := range BookDatas {
-	// 	if bookID == book.BookID {
-	// 		condition = true
-	// 		BookDatas[i] = updatedBook
-	// 		BookDatas[i].BookID = bookID
-	// 		break
-	// 	}
-	// }
-
-	// if !condition {
-	// 	ctx.AbortWithStatusJSON(http.StatusNotFound, gin.H{
-	// 		"data":    nil,
-	// 		"message": fmt.Sprintf("book with id %v not found", bookID),
-	// 	})
-	// 	return
-	// }
-
-	// convertBookId, _ := strconv.Atoi(bookID)
-	// ctx.JSON(http.StatusOK, gin.H{
-	// 	"data":    BookDatas[convertBookId-1],
-	// 	"message": fmt.Sprintf("Book with id %v has been successfully updated", bookID),
-	// })
+	ctx.JSON(http.StatusOK, gin.H{
+		"data":    nil,
+		"message": fmt.Sprintf("Order with id %v has been successfully updated", orderID),
+	})
 }
 
 func DeleteOrder(ctx *gin.Context) {
